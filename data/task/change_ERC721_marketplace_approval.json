@@ -1,0 +1,27 @@
+{
+    "createTime": 1651935835412,
+    "updateTime": 1652601212057,
+    "createdBy": "",
+    "updatedBy": "",
+    "name": "change_ERC721_marketplace_approval",
+    "description": "Change the operator approval state for the marketplace contract for ERC 721 tokens",
+    "retryCount": 3,
+    "timeoutSeconds": 180,
+    "inputKeys": [
+      "tokenAddress",
+      "operator",
+      "tokenId"
+    ],
+    "outputKeys": [],
+    "timeoutPolicy": "TIME_OUT_WF",
+    "retryLogic": "FIXED",
+    "retryDelaySeconds": 5,
+    "responseTimeoutSeconds": 180,
+    "concurrentExecLimit": 100,
+    "inputTemplate": {},
+    "rateLimitPerFrequency": 50,
+    "rateLimitFrequencyInSeconds": 30,
+    "ownerEmail": "madanhitansh239@gmail.com",
+    "pollTimeoutSeconds": 30,
+    "backoffScaleFactor": 1
+  }

@@ -1,0 +1,31 @@
+{
+    "createTime": 1651916301779,
+    "updateTime": 1652544157945,
+    "createdBy": "",
+    "updatedBy": "",
+    "name": "mint_ERC1155",
+    "description": "Mint an ERC1155",
+    "retryCount": 3,
+    "timeoutSeconds": 180,
+    "inputKeys": [
+      "tokenAddress",
+      "ownerAddress",
+      "tokenId",
+      "quantity",
+      "tokenUri"
+    ],
+    "outputKeys": [
+      "txHash"
+    ],
+    "timeoutPolicy": "TIME_OUT_WF",
+    "retryLogic": "FIXED",
+    "retryDelaySeconds": 5,
+    "responseTimeoutSeconds": 180,
+    "concurrentExecLimit": 100,
+    "inputTemplate": {},
+    "rateLimitPerFrequency": 50,
+    "rateLimitFrequencyInSeconds": 30,
+    "ownerEmail": "madanhitansh239@gmail.com",
+    "pollTimeoutSeconds": 30,
+    "backoffScaleFactor": 1
+  }

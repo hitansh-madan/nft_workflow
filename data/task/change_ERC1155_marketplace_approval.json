@@ -1,0 +1,28 @@
+{
+    "createTime": 1651935884131,
+    "updateTime": 1652601239475,
+    "createdBy": "",
+    "updatedBy": "",
+    "name": "change_ERC1155_marketplace_approval",
+    "description": "Change the operator approval state for the marketplace contract for ERC-1155 tokens",
+    "retryCount": 3,
+    "timeoutSeconds": 180,
+    "inputKeys": [
+      "tokenAddress",
+      "ownerAddress",
+      "operator",
+      "approved"
+    ],
+    "outputKeys": [],
+    "timeoutPolicy": "TIME_OUT_WF",
+    "retryLogic": "FIXED",
+    "retryDelaySeconds": 5,
+    "responseTimeoutSeconds": 180,
+    "concurrentExecLimit": 100,
+    "inputTemplate": {},
+    "rateLimitPerFrequency": 50,
+    "rateLimitFrequencyInSeconds": 30,
+    "ownerEmail": "madanhitansh239@gmail.com",
+    "pollTimeoutSeconds": 30,
+    "backoffScaleFactor": 1
+  }

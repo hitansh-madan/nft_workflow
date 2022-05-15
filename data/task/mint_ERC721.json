@@ -1,0 +1,30 @@
+{
+    "createTime": 1651916266616,
+    "updateTime": 1652544141240,
+    "createdBy": "",
+    "updatedBy": "",
+    "name": "mint_ERC721",
+    "description": "Mint an ERC-721 token",
+    "retryCount": 3,
+    "timeoutSeconds": 180,
+    "inputKeys": [
+      "tokenAddress",
+      "ownerAddress",
+      "tokenUri"
+    ],
+    "outputKeys": [
+      "txHash",
+      "tokenId"
+    ],
+    "timeoutPolicy": "TIME_OUT_WF",
+    "retryLogic": "FIXED",
+    "retryDelaySeconds": 5,
+    "responseTimeoutSeconds": 180,
+    "concurrentExecLimit": 100,
+    "inputTemplate": {},
+    "rateLimitPerFrequency": 50,
+    "rateLimitFrequencyInSeconds": 30,
+    "ownerEmail": "madanhitansh239@gmail.com",
+    "pollTimeoutSeconds": 30,
+    "backoffScaleFactor": 1
+  }

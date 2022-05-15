@@ -1,0 +1,32 @@
+{
+    "createTime": 1651936580903,
+    "updateTime": 1652630339600,
+    "createdBy": "",
+    "updatedBy": "",
+    "name": "create_ERC1155_marketplace_listing",
+    "description": "List an ERC-1155 token for sale on the marketplace contract",
+    "retryCount": 3,
+    "timeoutSeconds": 180,
+    "inputKeys": [
+      "marketplaceAddress",
+      "tokenAddress",
+      "tokenId",
+      "ownerAddress",
+      "price",
+      "quantity"
+    ],
+    "outputKeys": [
+      "listingId"
+    ],
+    "timeoutPolicy": "TIME_OUT_WF",
+    "retryLogic": "FIXED",
+    "retryDelaySeconds": 5,
+    "responseTimeoutSeconds": 180,
+    "concurrentExecLimit": 100,
+    "inputTemplate": {},
+    "rateLimitPerFrequency": 50,
+    "rateLimitFrequencyInSeconds": 30,
+    "ownerEmail": "madanhitansh239@gmail.com",
+    "pollTimeoutSeconds": 30,
+    "backoffScaleFactor": 1
+  }

@@ -1,0 +1,184 @@
+{
+    "updateTime": 1652614453755,
+    "name": "mint_and_list_NFT_for_sale",
+    "description": "Upload NFT data to IPFS, mint an ERC721 or ERC1155 token and put it for sale on the marketplace",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "upload_and_pin_NFT_metadata_to_IPFS",
+        "taskReferenceName": "upload_and_pin_NFT_metadata_to_IPFS",
+        "inputParameters": {
+          "imageUrl": "${workflow.input.imageUrl}",
+          "metadata": "${workflow.input.metadata}"
+        },
+        "type": "SUB_WORKFLOW",
+        "decisionCases": {},
+        "defaultCase": [],
+        "forkTasks": [],
+        "startDelay": 0,
+        "subWorkflowParam": {
+          "name": "upload_and_pin_NFT_metadata_to_IPFS",
+          "version": 1
+        },
+        "joinOn": [],
+        "optional": false,
+        "defaultExclusiveJoinTask": [],
+        "asyncComplete": false,
+        "loopOver": []
+      },
+      {
+        "name": "token_switch",
+        "taskReferenceName": "token_switch",
+        "inputParameters": {
+          "tokenStandard": "${workflow.input.tokenStandard}"
+        },
+        "type": "SWITCH",
+        "decisionCases": {
+          "ERC721": [
+            {
+              "name": "mint_ERC721",
+              "taskReferenceName": "mint_ERC721",
+              "inputParameters": {
+                "tokenAddress": "${workflow.input.tokenAddress}",
+                "ownerAddress": "${workflow.input.ownerAddress}",
+                "tokenUri": "${upload_and_pin_NFT_metadata_to_IPFS.output.ipfsUrl}"
+              },
+              "type": "SIMPLE",
+              "decisionCases": {},
+              "defaultCase": [],
+              "forkTasks": [],
+              "startDelay": 0,
+              "joinOn": [],
+              "optional": false,
+              "defaultExclusiveJoinTask": [],
+              "asyncComplete": false,
+              "loopOver": []
+            },
+            {
+              "name": "approve_and_list_ERC721_for_sale",
+              "taskReferenceName": "approve_and_list_ERC721_for_sale",
+              "inputParameters": {
+                "marketplaceAddress": "${workflow.input.marketplaceAddress}",
+                "tokenAddress": "${workflow.input.tokenAddress}",
+                "ownerAddress": "${workflow.input.ownerAddress}",
+                "tokenId": "${mint_ERC721.output.tokenId}",
+                "price": "${workflow.input.price}"
+              },
+              "type": "SUB_WORKFLOW",
+              "decisionCases": {},
+              "defaultCase": [],
+              "forkTasks": [],
+              "startDelay": 0,
+              "subWorkflowParam": {
+                "name": "approve_and_list_ERC721_for_sale",
+                "version": 1
+              },
+              "joinOn": [],
+              "optional": false,
+              "defaultExclusiveJoinTask": [],
+              "asyncComplete": false,
+              "loopOver": []
+            }
+          ],
+          "ERC1155": [
+            {
+              "name": "mint_ERC1155",
+              "taskReferenceName": "mint_ERC1155",
+              "inputParameters": {
+                "tokenAddress": "${workflow.input.tokenAddress}",
+                "ownerAddress": "${workflow.input.ownerAddress}",
+                "tokenUri": "${upload_and_pin_NFT_metadata_to_IPFS.output.ipfsUrl}",
+                "tokenId": "${workflow.input.tokenId}",
+                "quantity": "${workflow.input.quantity}"
+              },
+              "type": "SIMPLE",
+              "decisionCases": {},
+              "defaultCase": [],
+              "forkTasks": [],
+              "startDelay": 0,
+              "joinOn": [],
+              "optional": false,
+              "defaultExclusiveJoinTask": [],
+              "asyncComplete": false,
+              "loopOver": []
+            },
+            {
+              "name": "approve_and_list_ERC1155_for_sale",
+              "taskReferenceName": "approve_and_list_ERC1155_for_sale",
+              "inputParameters": {
+                "marketplaceAddress": "${workflow.input.marketplaceAddress}",
+                "tokenAddress": "${workflow.input.tokenAddress}",
+                "ownerAddress": "${workflow.input.ownerAddress}",
+                "tokenId": "${workflow.input.tokenId}",
+                "price": "${workflow.input.price}",
+                "quantity": "${workflow.input.quantity}"
+              },
+              "type": "SUB_WORKFLOW",
+              "decisionCases": {},
+              "defaultCase": [],
+              "forkTasks": [],
+              "startDelay": 0,
+              "subWorkflowParam": {
+                "name": "approve_and_list_ERC1155_for_sale",
+                "version": 1
+              },
+              "joinOn": [],
+              "optional": false,
+              "defaultExclusiveJoinTask": [],
+              "asyncComplete": false,
+              "loopOver": []
+            }
+          ]
+        },
+        "defaultCase": [
+          {
+            "name": "terminate",
+            "taskReferenceName": "terminate",
+            "inputParameters": {
+              "terminationStatus": "FAILED"
+            },
+            "type": "TERMINATE",
+            "decisionCases": {},
+            "defaultCase": [],
+            "forkTasks": [],
+            "startDelay": 0,
+            "joinOn": [],
+            "optional": false,
+            "defaultExclusiveJoinTask": [],
+            "asyncComplete": false,
+            "loopOver": []
+          }
+        ],
+        "forkTasks": [],
+        "startDelay": 0,
+        "joinOn": [],
+        "optional": false,
+        "defaultExclusiveJoinTask": [],
+        "asyncComplete": false,
+        "loopOver": [],
+        "evaluatorType": "value-param",
+        "expression": "tokenStandard"
+      }
+    ],
+    "inputParameters": [
+      "tokenStandard",
+      "imageUrl",
+      "metadata",
+      "marketplaceAddress",
+      "tokenAddress",
+      "ownerAddress",
+      "tokenId",
+      "quantity"
+    ],
+    "outputParameters": {
+      "listingId": "${approve_and_list_ERC1155_for_sale.output.listingId}${approve_and_list_ERC721_for_sale.output.listingId}"
+    },
+    "schemaVersion": 2,
+    "restartable": true,
+    "workflowStatusListenerEnabled": false,
+    "ownerEmail": "madanhitansh239@gmail.com",
+    "timeoutPolicy": "ALERT_ONLY",
+    "timeoutSeconds": 0,
+    "variables": {},
+    "inputTemplate": {}
+  }

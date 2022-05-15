@@ -1,0 +1,85 @@
+{
+    "updateTime": 1652613909885,
+    "name": "approve_and_list_ERC721_for_sale",
+    "description": "Handle NFT approval state for marketplace & list an ERC721 token for sale on the marketplace",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "change_ERC721_marketplace_approval",
+        "taskReferenceName": "change_ERC721_marketplace_approval_true",
+        "inputParameters": {
+          "tokenAddress": "${workflow.input.tokenAddress}",
+          "operator": "${workflow.input.marketplaceAddress}",
+          "tokenId": "${workflow.input.tokenId}"
+        },
+        "type": "SIMPLE",
+        "decisionCases": {},
+        "defaultCase": [],
+        "forkTasks": [],
+        "startDelay": 0,
+        "joinOn": [],
+        "optional": false,
+        "defaultExclusiveJoinTask": [],
+        "asyncComplete": false,
+        "loopOver": []
+      },
+      {
+        "name": "create_ERC721_marketplace_listing",
+        "taskReferenceName": "create_ERC721_marketplace_listing",
+        "inputParameters": {
+          "marketplaceAddress": "${workflow.input.marketplaceAddress}",
+          "tokenAddress": "${workflow.input.tokenAddress}",
+          "tokenId": "${workflow.input.tokenId}",
+          "ownerAddress": "${workflow.input.ownerAddress}",
+          "price": "${workflow.input.price}"
+        },
+        "type": "SIMPLE",
+        "decisionCases": {},
+        "defaultCase": [],
+        "forkTasks": [],
+        "startDelay": 0,
+        "joinOn": [],
+        "optional": true,
+        "defaultExclusiveJoinTask": [],
+        "asyncComplete": false,
+        "loopOver": []
+      },
+      {
+        "name": "change_ERC721_marketplace_approval",
+        "taskReferenceName": "change_ERC721_marketplace_approval_zeroAddress",
+        "inputParameters": {
+          "tokenAddress": "${workflow.input.tokenAddress}",
+          "operator": "0x0000000000000000000000000000000000000000",
+          "tokenId": "${workflow.input.tokenId}"
+        },
+        "type": "SIMPLE",
+        "decisionCases": {},
+        "defaultCase": [],
+        "forkTasks": [],
+        "startDelay": 0,
+        "joinOn": [],
+        "optional": true,
+        "defaultExclusiveJoinTask": [],
+        "asyncComplete": false,
+        "loopOver": []
+      }
+    ],
+    "inputParameters": [
+      "marketplaceAddress",
+      "tokenAddress",
+      "ownerAddress",
+      "tokenId",
+      "price"
+    ],
+    "outputParameters": {
+      "listingId": "${create_ERC721_marketplace_listing.output.listingId}"
+    },
+    "schemaVersion": 2,
+    "restartable": true,
+    "workflowStatusListenerEnabled": false,
+    "ownerEmail": "madanhitansh239@gmail.com",
+    "timeoutPolicy": "ALERT_ONLY",
+    "timeoutSeconds": 0,
+    "variables": {},
+    "inputTemplate": {}
+  }

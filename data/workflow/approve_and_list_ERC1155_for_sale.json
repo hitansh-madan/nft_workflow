@@ -1,0 +1,89 @@
+{
+    "updateTime": 1652614304899,
+    "name": "approve_and_list_ERC1155_for_sale",
+    "description": "Handle NFT approval state for marketplace & list an ERC1155 token for sale on the marketplace",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "change_ERC1155_marketplace_approval",
+        "taskReferenceName": "change_ERC1155_marketplace_approval_true",
+        "inputParameters": {
+          "tokenAddress": "${workflow.input.tokenAddress}",
+          "ownerAddress": "${workflow.input.ownerAddress}",
+          "operator": "${workflow.input.marketplaceAddress}",
+          "approved": true
+        },
+        "type": "SIMPLE",
+        "decisionCases": {},
+        "defaultCase": [],
+        "forkTasks": [],
+        "startDelay": 0,
+        "joinOn": [],
+        "optional": false,
+        "defaultExclusiveJoinTask": [],
+        "asyncComplete": false,
+        "loopOver": []
+      },
+      {
+        "name": "create_ERC1155_marketplace_listing",
+        "taskReferenceName": "create_ERC1155_marketplace_listing",
+        "inputParameters": {
+          "marketplaceAddress": "${workflow.input.marketplaceAddress}",
+          "tokenAddress": "${workflow.input.tokenAddress}",
+          "tokenId": "${workflow.input.tokenId}",
+          "ownerAddress": "${workflow.input.ownerAddress}",
+          "price": "${workflow.input.price}",
+          "quantity": "${workflow.input.quantity}"
+        },
+        "type": "SIMPLE",
+        "decisionCases": {},
+        "defaultCase": [],
+        "forkTasks": [],
+        "startDelay": 0,
+        "joinOn": [],
+        "optional": true,
+        "defaultExclusiveJoinTask": [],
+        "asyncComplete": false,
+        "loopOver": []
+      },
+      {
+        "name": "change_ERC1155_marketplace_approval",
+        "taskReferenceName": "change_ERC1155_marketplace_approval_false",
+        "inputParameters": {
+          "tokenAddress": "${workflow.input.tokenAddress}",
+          "ownerAddress": "${workflow.input.ownerAddress}",
+          "operator": "${workflow.input.marketplaceAddress}",
+          "approved": false
+        },
+        "type": "SIMPLE",
+        "decisionCases": {},
+        "defaultCase": [],
+        "forkTasks": [],
+        "startDelay": 0,
+        "joinOn": [],
+        "optional": false,
+        "defaultExclusiveJoinTask": [],
+        "asyncComplete": false,
+        "loopOver": []
+      }
+    ],
+    "inputParameters": [
+      "marketplaceAddress",
+      "tokenAddress",
+      "ownerAddress",
+      "tokenId",
+      "price",
+      "quantity"
+    ],
+    "outputParameters": {
+      "listingId": "${create_ERC1155_marketplace_listing.output.listingId}"
+    },
+    "schemaVersion": 2,
+    "restartable": true,
+    "workflowStatusListenerEnabled": false,
+    "ownerEmail": "madanhitansh239@gmail.com",
+    "timeoutPolicy": "ALERT_ONLY",
+    "timeoutSeconds": 0,
+    "variables": {},
+    "inputTemplate": {}
+  }

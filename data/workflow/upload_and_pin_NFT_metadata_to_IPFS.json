@@ -1,0 +1,58 @@
+{
+    "updateTime": 1652517483146,
+    "name": "upload_and_pin_NFT_metadata_to_IPFS",
+    "description": "Uploads and pins NFT image & metadata to IPFS using a pinning api",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "upload_and_pin_image_to_IPFS",
+        "taskReferenceName": "upload_and_pin_image_to_IPFS",
+        "inputParameters": {
+          "imageUrl": "${workflow.input.imageUrl}"
+        },
+        "type": "SIMPLE",
+        "decisionCases": {},
+        "defaultCase": [],
+        "forkTasks": [],
+        "startDelay": 0,
+        "joinOn": [],
+        "optional": false,
+        "defaultExclusiveJoinTask": [],
+        "asyncComplete": false,
+        "loopOver": []
+      },
+      {
+        "name": "upload_and_pin_metadata_to_IPFS",
+        "taskReferenceName": "upload_and_pin_metadata_to_IPFS",
+        "inputParameters": {
+          "imageIpfsUrl": "${upload_and_pin_image_to_IPFS.output.imageIpfsUrl}",
+          "metadata": "${workflow.input.metadata}"
+        },
+        "type": "SIMPLE",
+        "decisionCases": {},
+        "defaultCase": [],
+        "forkTasks": [],
+        "startDelay": 0,
+        "joinOn": [],
+        "optional": false,
+        "defaultExclusiveJoinTask": [],
+        "asyncComplete": false,
+        "loopOver": []
+      }
+    ],
+    "inputParameters": [
+      "imageUrl",
+      "metadata"
+    ],
+    "outputParameters": {
+      "ipfsUrl": "${upload_and_pin_metadata_to_IPFS.output.metadataIpfsUrl}"
+    },
+    "schemaVersion": 2,
+    "restartable": true,
+    "workflowStatusListenerEnabled": true,
+    "ownerEmail": "madanhitansh239@gmail.com",
+    "timeoutPolicy": "ALERT_ONLY",
+    "timeoutSeconds": 0,
+    "variables": {},
+    "inputTemplate": {}
+  }

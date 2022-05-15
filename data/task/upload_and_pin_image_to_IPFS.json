@@ -1,0 +1,27 @@
+{
+    "createTime": 1651917137460,
+    "updateTime": 1652630476179,
+    "createdBy": "",
+    "updatedBy": "",
+    "name": "upload_and_pin_image_to_IPFS",
+    "description": "Pull image from a web URL and upload and pin to IPFS using NFT.Storage's API(https://nft.storage/)",
+    "retryCount": 3,
+    "timeoutSeconds": 60,
+    "inputKeys": [
+      "imageUrl"
+    ],
+    "outputKeys": [
+      "imageIpfsUrl"
+    ],
+    "timeoutPolicy": "TIME_OUT_WF",
+    "retryLogic": "FIXED",
+    "retryDelaySeconds": 5,
+    "responseTimeoutSeconds": 30,
+    "concurrentExecLimit": 100,
+    "inputTemplate": {},
+    "rateLimitPerFrequency": 50,
+    "rateLimitFrequencyInSeconds": 30,
+    "ownerEmail": "madanhitansh239@gmail.com",
+    "pollTimeoutSeconds": 30,
+    "backoffScaleFactor": 1
+  }
